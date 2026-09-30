@@ -227,4 +227,4 @@ Built individually as a React frontend project with a focus on understanding eve
 
 ## 📄 License
 
-This project was created for educational and portfolio purposes.# MONERA
+This project was created for educational and portfolio purposes.

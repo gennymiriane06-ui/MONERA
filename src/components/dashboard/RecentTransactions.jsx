@@ -1,6 +1,6 @@
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
-import { useFinance } from "../../context/FinanceContext";
 import { formatCurrency } from "../../utils/currency";
+import { useFinance } from "../../hooks/useFinance";
 
 function RecentTransactions() {
   const { transactions, categories } = useFinance();

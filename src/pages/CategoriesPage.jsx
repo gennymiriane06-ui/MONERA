@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
-import { useFinance } from "../context/FinanceContext";
+import { useFinance } from "../hooks/useFinance";
 
 function CategoriesPage() {
   const {

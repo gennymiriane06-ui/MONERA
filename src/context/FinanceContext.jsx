@@ -1,8 +1,6 @@
-import { createContext, useContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { defaultCategories } from "../data/defaultCategories";
-
-const FinanceContext = createContext();
+import { FinanceContext } from "./FinanceContextValue";
 
 export function FinanceProvider({ children }) {
   const [transactions, setTransactions] = useLocalStorage(
@@ -115,8 +113,4 @@ export function FinanceProvider({ children }) {
       {children}
     </FinanceContext.Provider>
   );
-}
-
-export function useFinance() {
-  return useContext(FinanceContext);
 }

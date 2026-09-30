@@ -9,7 +9,7 @@ import RecentTransactions from "../components/dashboard/RecentTransactions";
 import CategoryChart from "../components/dashboard/CategoryChart";
 import SpendingChart from "../components/dashboard/SpendingChart";
 
-import { useFinance } from "../context/FinanceContext";
+import { useFinance } from "../hooks/useFinance";
 import { calculateTotals } from "../utils/calculations";
 import { formatCurrency } from "../utils/currency";
 

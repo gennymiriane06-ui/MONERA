@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
-
-import { useFinance } from "../context/FinanceContext";
+import { useFinance } from "../hooks/useFinance";
 import BudgetForm from "../components/budgets/BudgetForm";
 import BudgetCard from "../components/budgets/BudgetCard";
 

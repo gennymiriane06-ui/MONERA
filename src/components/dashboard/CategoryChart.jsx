@@ -1,30 +1,18 @@
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-
-import { useFinance } from "../../context/FinanceContext";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { useFinance } from "../../hooks/useFinance";
 import { getCategorySpending } from "../../utils/calculations";
 import { formatCurrency } from "../../utils/currency";
 
 function CategoryChart() {
   const { transactions, categories } = useFinance();
 
-  const data = getCategorySpending(
-    transactions,
-    categories
-  );
+  const data = getCategorySpending(transactions, categories);
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <h2 className="font-bold">Spending by category</h2>
 
-      <p className="text-sm text-slate-500">
-        Where your money goes
-      </p>
+      <p className="text-sm text-slate-500">Where your money goes</p>
 
       {data.length === 0 ? (
         <div className="flex h-64 items-center justify-center text-sm text-slate-500">
@@ -42,22 +30,12 @@ function CategoryChart() {
                 cy="50%"
                 outerRadius={90}
               >
-                {data.map((item, index) => (
-                  <Cell
-                    key={item.name}
-                    fill={
-                      categories[index]?.color ||
-                      "#6366f1"
-                    }
-                  />
+                {data.map((item) => (
+                  <Cell key={item.name} fill={item.color || "#6366f1"} />
                 ))}
               </Pie>
 
-              <Tooltip
-                formatter={(value) =>
-                  formatCurrency(value)
-                }
-              />
+              <Tooltip formatter={(value) => formatCurrency(value)} />
             </PieChart>
           </ResponsiveContainer>
         </div>

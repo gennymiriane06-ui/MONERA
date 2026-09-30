@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { useFinance } from "../../context/FinanceContext";
+import { useFinance } from "../../hooks/useFinance";
 
 function BudgetForm({ onClose }) {
   const { categories, addBudget } = useFinance();
@@ -11,12 +11,13 @@ function BudgetForm({ onClose }) {
 
   const [categoryId, setCategoryId] = useState("");
   const [limit, setLimit] = useState("");
+  const [error, setError] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
 
     if (!categoryId || !limit || Number(limit) <= 0) {
-      alert("Please enter a valid category and budget.");
+      setError("Please enter a valid category and budget.");
       return;
     }
 
@@ -27,6 +28,16 @@ function BudgetForm({ onClose }) {
     });
 
     onClose();
+  }
+
+  function handleCategoryChange(event) {
+    setCategoryId(event.target.value);
+    setError("");
+  }
+
+  function handleLimitChange(event) {
+    setLimit(event.target.value);
+    setError("");
   }
 
   return (
@@ -45,12 +56,19 @@ function BudgetForm({ onClose }) {
           </button>
         </div>
 
+        {error && (
+          <div
+            role="alert"
+            className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300"
+          >
+            {error}
+          </div>
+        )}
+
         <div className="space-y-4">
           <select
             value={categoryId}
-            onChange={(event) =>
-              setCategoryId(event.target.value)
-            }
+            onChange={handleCategoryChange}
             className="w-full rounded-xl border p-3 dark:border-slate-700 dark:bg-slate-800"
           >
             <option value="">Select category</option>
@@ -66,9 +84,7 @@ function BudgetForm({ onClose }) {
             type="number"
             min="1"
             value={limit}
-            onChange={(event) =>
-              setLimit(event.target.value)
-            }
+            onChange={handleLimitChange}
             placeholder="Monthly limit"
             className="w-full rounded-xl border p-3 dark:border-slate-700 dark:bg-slate-800"
           />

@@ -1,5 +1,5 @@
 import { Pencil, Trash2 } from "lucide-react";
-import { useFinance } from "../../context/FinanceContext";
+import { useFinance } from "../../hooks/useFinance";
 
 export default function TransactionList({
   transactions,
@@ -16,7 +16,7 @@ export default function TransactionList({
     return (
       <div className="rounded-2xl border bg-white p-10 text-center dark:border-slate-800 dark:bg-slate-900">
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-          No transactions found
+          No transactions found match your filters.
         </h3>
 
         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">

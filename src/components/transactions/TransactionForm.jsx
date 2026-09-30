@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFinance } from "../../context/FinanceContext";
+import { useFinance } from "../../hooks/useFinance";
 
 export default function TransactionForm({
   onClose,
@@ -10,6 +10,8 @@ export default function TransactionForm({
     updateTransaction,
     categories,
   } = useFinance();
+
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     type: transactionToEdit?.type || "expense",
@@ -24,6 +26,8 @@ export default function TransactionForm({
   function handleChange(event) {
     const { name, value } = event.target;
 
+    setError("");
+
     setFormData((currentData) => ({
       ...currentData,
       [name]: value,
@@ -34,12 +38,12 @@ export default function TransactionForm({
     event.preventDefault();
 
     if (!formData.amount || Number(formData.amount) <= 0) {
-      alert("Please enter a valid amount.");
+      setError("Please enter a valid amount.");
       return;
     }
 
     if (!formData.categoryId) {
-      alert("Please select a category.");
+      setError("Please select a category.");
       return;
     }
 
@@ -66,6 +70,15 @@ export default function TransactionForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {error && (
+        <div
+          role="alert"
+          className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300"
+        >
+          {error}
+        </div>
+      )}
+
       <div>
         <label className="mb-2 block text-sm font-medium">
           Type

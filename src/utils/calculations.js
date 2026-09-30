@@ -28,6 +28,7 @@ export function getCategorySpending(transactions, categories) {
       return {
         name: category.name,
         value: total,
+        color: category.color,
       };
     })
     .filter((category) => category.value > 0);

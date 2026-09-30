@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { useFinance } from "../../context/FinanceContext";
+import { useFinance } from "../../hooks/useFinance";
 import { formatCurrency } from "../../utils/currency";
 
 function SpendingChart() {

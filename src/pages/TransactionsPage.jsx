@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Plus } from "lucide-react";
-import { useFinance } from "../context/FinanceContext";
+import { useFinance } from "../hooks/useFinance";
 import { useDebounce } from "../hooks/useDebounce";
 import TransactionForm from "../components/transactions/TransactionForm";
 import TransactionList from "../components/transactions/TransactionList";

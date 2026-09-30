@@ -1,6 +1,6 @@
 import { AlertTriangle, Pencil, Trash2 } from "lucide-react";
-import { useFinance } from "../../context/FinanceContext";
 import { formatCurrency } from "../../utils/currency";
+import { useFinance } from "../../hooks/useFinance";
 
 function BudgetCard({ budget, onEdit }) {
   const {

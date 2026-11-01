@@ -1,3 +1,4 @@
+
 import { Pencil, Trash2 } from "lucide-react";
 import { useFinance } from "../../hooks/useFinance";
 
@@ -6,21 +7,30 @@ export default function TransactionList({
   onEdit,
   onDelete,
 }) {
-  const { categories } = useFinance();
+  const {
+    categories,
+    transactions: allTransactions,
+  } = useFinance();
 
   function getCategory(categoryId) {
     return categories.find((category) => category.id === categoryId);
   }
 
   if (transactions.length === 0) {
+    const hasNoTransactions = allTransactions.length === 0;
+
     return (
       <div className="rounded-2xl border bg-white p-10 text-center dark:border-slate-800 dark:bg-slate-900">
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-          No transactions found match your filters.
+          {hasNoTransactions
+            ? "No transactions yet"
+            : "No matching transactions"}
         </h3>
 
         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          Try changing your filters or add a new transaction.
+          {hasNoTransactions
+            ? "Start tracking your money by adding your first transaction."
+            : "Try changing your filters or search for something else."}
         </p>
       </div>
     );

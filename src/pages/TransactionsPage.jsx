@@ -27,7 +27,8 @@ export default function TransactionsPage() {
   const debouncedSearch = useDebounce(search);
 
   const filteredTransactions = useMemo(() => {
-    return transactions.filter((transaction) => {
+  return transactions
+    .filter((transaction) => {
       const note = transaction.note || "";
 
       const matchesSearch = note
@@ -50,7 +51,8 @@ export default function TransactionsPage() {
         matchesType &&
         matchesCategory
       );
-    });
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
   }, [
     transactions,
     debouncedSearch,

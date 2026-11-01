@@ -18,11 +18,16 @@ function DashboardPage() {
 
   const totals = calculateTotals(transactions);
 
+  const currentMonth = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+
   return (
     <div className="mx-auto max-w-7xl space-y-6">
       <div>
         <p className="text-sm text-slate-500">
-          September 2026
+          {currentMonth}
         </p>
 
         <h1 className="mt-1 text-3xl font-bold">

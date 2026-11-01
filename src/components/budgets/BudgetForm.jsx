@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useFinance } from "../../hooks/useFinance";
@@ -9,22 +10,28 @@ function BudgetForm({ onClose }) {
     (category) => category.type === "expense"
   );
 
+  const today = new Date();
+  const currentMonth = `${today.getFullYear()}-${String(
+    today.getMonth() + 1
+  ).padStart(2, "0")}`;
+
   const [categoryId, setCategoryId] = useState("");
   const [limit, setLimit] = useState("");
+  const [month, setMonth] = useState(currentMonth);
   const [error, setError] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (!categoryId || !limit || Number(limit) <= 0) {
-      setError("Please enter a valid category and budget.");
+    if (!categoryId || !limit || Number(limit) <= 0 || !month) {
+      setError("Please enter a valid category, month and budget.");
       return;
     }
 
     addBudget({
       categoryId,
       limit: Number(limit),
-      month: new Date().toISOString().slice(0, 7),
+      month,
     });
 
     onClose();
@@ -37,6 +44,11 @@ function BudgetForm({ onClose }) {
 
   function handleLimitChange(event) {
     setLimit(event.target.value);
+    setError("");
+  }
+
+  function handleMonthChange(event) {
+    setMonth(event.target.value);
     setError("");
   }
 
@@ -79,6 +91,13 @@ function BudgetForm({ onClose }) {
               </option>
             ))}
           </select>
+
+          <input
+            type="month"
+            value={month}
+            onChange={handleMonthChange}
+            className="w-full rounded-xl border p-3 dark:border-slate-700 dark:bg-slate-800"
+          />
 
           <input
             type="number"

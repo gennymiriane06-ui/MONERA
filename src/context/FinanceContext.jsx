@@ -4,17 +4,17 @@ import { FinanceContext } from "./FinanceContextValue";
 
 export function FinanceProvider({ children }) {
   const [transactions, setTransactions] = useLocalStorage(
-    "finora-transactions",
+    "monerara-transactions",
     []
   );
 
   const [categories, setCategories] = useLocalStorage(
-    "finora-categories",
+    "monera-categories",
     defaultCategories
   );
 
   const [budgets, setBudgets] = useLocalStorage(
-    "finora-budgets",
+    "monera-budgets",
     []
   );
 

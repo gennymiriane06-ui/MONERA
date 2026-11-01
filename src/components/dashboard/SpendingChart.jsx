@@ -1,3 +1,4 @@
+
 import {
   LineChart,
   Line,
@@ -13,13 +14,23 @@ import { formatCurrency } from "../../utils/currency";
 function SpendingChart() {
   const { transactions } = useFinance();
 
-  const data = [...transactions]
-    .filter((transaction) => transaction.type === "expense")
-    .sort((a, b) => a.date.localeCompare(b.date))
-    .map((transaction) => ({
-      date: transaction.date,
-      amount: transaction.amount,
-    }));
+  const expenses = transactions.filter(
+    (transaction) => transaction.type === "expense",
+  );
+
+  const groupedExpenses = new Map();
+
+  expenses.forEach((transaction) => {
+    const date = transaction.date;
+    const currentAmount = groupedExpenses.get(date) || 0;
+
+    groupedExpenses.set(date, currentAmount + Number(transaction.amount));
+  });
+
+  const data = Array.from(groupedExpenses, ([date, amount]) => ({
+    date,
+    amount,
+  })).sort((a, b) => a.date.localeCompare(b.date));
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -42,9 +53,7 @@ function SpendingChart() {
               <YAxis />
 
               <Tooltip
-                formatter={(value) =>
-                  formatCurrency(value)
-                }
+                formatter={(value) => formatCurrency(value)}
               />
 
               <Line

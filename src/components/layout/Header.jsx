@@ -1,7 +1,22 @@
+
 import { Bell } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import ThemeToggle from "../common/ThemeToggle";
 
 function Header() {
+  const location = useLocation();
+
+  const pageTitles = {
+    "/dashboard": "Financial Overview",
+    "/transactions": "Transactions",
+    "/budgets": "Budgets",
+    "/categories": "Categories",
+    "/settings": "Settings",
+  };
+
+  const pageTitle =
+    pageTitles[location.pathname] || "Financial Overview";
+
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 px-4 py-4 backdrop-blur md:px-6 dark:border-slate-800 dark:bg-slate-900/90">
       <div className="flex items-center justify-between">
@@ -11,7 +26,7 @@ function Header() {
           </p>
 
           <h2 className="text-lg font-bold">
-            Financial Overview
+            {pageTitle}
           </h2>
         </div>
 

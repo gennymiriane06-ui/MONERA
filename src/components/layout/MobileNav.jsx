@@ -1,8 +1,10 @@
+
 import {
   LayoutDashboard,
   Receipt,
   Wallet,
   Tags,
+  Settings,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -26,6 +28,11 @@ const links = [
     path: "/categories",
     name: "Categories",
     icon: Tags,
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    icon: Settings,
   },
 ];
 
